@@ -1,1 +1,3 @@
-# stats
+# Statistical library
+
+
