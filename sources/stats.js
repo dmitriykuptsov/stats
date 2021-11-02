@@ -29,6 +29,7 @@ var jstat = {
 	 */
 	sample_min: function(data) {
 		var min = undefined;
+		if (data.length == 0) return undefined;
 		for (var i = 0; i < data.length; i++) {
 			if (min == undefined) {
 				min = data[i];
@@ -46,6 +47,7 @@ var jstat = {
 	 */
 	sample_max: function(data) {
 		var max = undefined;
+		if (data.length == 0) return undefined;
 		for (var i = 0; i < data.length; i++) {
 			if (max == undefined) {
 				max = data[i];
@@ -64,6 +66,7 @@ var jstat = {
 	sample_mean: function(data) {
 		var sum = 0;
 		var n = data.length;
+		if (n == 0) return undefined;
 		for (var i = 0; i < n; i++) {
 			sum += data[i];
 		}
@@ -129,17 +132,27 @@ var jstat = {
 	/**
 	 * Cumulative distribution function
 	 */
-	punif: function(a, b, x) {
-		if (x < a) return 0;
-		if (x > b) return 1;
-		return (x - a) / (b - a);
+	punif: function(a, b, q) {
+		if (q < a) return 0;
+		if (q > b) return 1;
+		return (q - a) / (b - a);
+	},
+
+	/**
+	 * Compute density
+	 */
+	dunif: function(a, b, x) {
+		if (x.length != 2) {
+			return undefined;
+		}
+		return this.punif(x[1]) - this.punif(x[0]);
 	},
 
 	/**
 	 * Kruskal-Wallis test
 	 * Time complexity of the test is O(nlogn)
 	*/
-	kruska_F_score: function(data) {
+	kruskal_F_score: function(data) {
 		/*
 		Space complexity: O(nlogn)
 		Time complexity: O(nlogn)
