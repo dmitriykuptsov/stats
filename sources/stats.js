@@ -86,7 +86,7 @@ var jstat = {
 		var sum = 0;
 		var n = data.length - 1;
 		for (var i = 0; i < n + 1; i++) {
-			sum += (data[i] - mean) * (data[i] - 1);
+			sum += (data[i] - mean) * (data[i] - mean);
 		}
 
 		return sum / n;
