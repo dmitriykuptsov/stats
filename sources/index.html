@@ -4,7 +4,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			console.log(Math.round(100*jstat.kruska_F_score([[23, 41, 54, 66, 90], [45, 55, 60, 70, 72], [20, 30, 34, 40, 44]]))/100);
+			console.log(Math.round(100*jstat.kruskal_F_score([[23, 41, 54, 66, 90], [45, 55, 60, 70, 72], [20, 30, 34, 40, 44]]))/100);
 			console.log(jstat.sample_mean([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 			console.log(jstat.sample_std([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 			console.log(jstat.median([12, 21, 3, 4, 11, 6, 7, 5, 9, 10, 43]))
@@ -12,8 +12,8 @@
 			console.log(jstat.sample_max([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 			console.log(jstat.sample_min([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 			for (var i = 0; i < 100; i++) {
-				//console.log(jstat.rnorm(0, 1));
-				jstat.rnorm(0, 1);
+				console.log(jstat.rnorm(0, 1));
+				//jstat.rnorm(0, 1);
 			}
 		</script>
 	</body>

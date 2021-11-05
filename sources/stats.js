@@ -107,7 +107,6 @@ var jstat = {
 			return undefined;
 		}
 		var sorted = this.quicksort(data);
-		console.log(sorted);
 		if (sorted.length % 2 == 1) {
 			return sorted[Math.floor(sorted.length / 2)];
 		} else {
@@ -124,6 +123,7 @@ var jstat = {
 
 	/**
 	 * Quantile function of the uniform distribution
+	 * Inverse CDF
 	 */
 	quinf: function(a, b, p) {
 		return (b - a) * p + a;
@@ -146,6 +146,37 @@ var jstat = {
 			return undefined;
 		}
 		return this.punif(x[1]) - this.punif(x[0]);
+	},
+
+	/**
+	 * Random normal variable
+	 */
+	rnorm: function(mu, sigma) {
+		var U1 = this.runif(0, 1);
+		var U2 = this.runif(0, 1);
+
+		var r = Math.sqrt(-2*Math.log(U1))*Math.cos(2*Math.PI*U2);
+		return r*sigma + mu;
+	},
+
+	/**
+	 * https://www.johndcook.com/blog/normal_cdf_inverse/
+	 * https://stackedboxes.org/2017/05/01/acklams-normal-quantile-function/
+	 * Inverse CDF
+	 */
+	qnorm: function(mu, sigma, p) {
+		return 0;
+	},
+
+	pnorm: function(mu, sigma, q) {
+		return 0;
+	},
+
+	dunif: function(mu, sigma, x) {
+		if (x.length != 2) {
+			return undefined;
+		}
+		return this.pnorm(x[1]) - this.pnorm(x[0]);
 	},
 
 	/**
