@@ -100,9 +100,9 @@ var jstat = {
 	},
 
 	/**
-	 * Compute median
+	 * Computes median
 	 */
-	median: function(data) {
+	sample_median: function(data) {
 		if (data.length == 0) {
 			return undefined;
 		}
@@ -273,5 +273,32 @@ var jstat = {
 		}
 
 		return kruskal(data);
+	},
+
+	ANOVA_F_score: function(x) {
+		var y = [];
+		var mi = []
+		//Complexity O(m)
+		for (var i=0; i < x.length; i++) {
+			mi.push(this.sample_mean(x[i]));
+			y.concat(x[i]);
+		}
+		//complexity O(n)
+		var gm = this.sample_mean(y);
+		var ssbetween = 0;
+		//Complexity O(m)
+		for (var i=0; i < x.length; i++) {
+			ssbetween += x[i].length * (mi[i] - gm) * (mi[i] - gm);
+		}
+		ssbetween = ssbetween / (x.length - 1);
+		sswithin = 0;
+		//Complexity O(nm)
+		for (var i = 0; i < x.length; i++) {
+			for (var j = 0; j < x[i].length; j++) {
+				sswithin += (x[i][j] - mi[i]) * (x[i][j] - mi[i]);
+			}
+		}
+		sswithin = sswithin / (y.length - x.length);
+		return ssbetween / sswithin;
 	}
 }
