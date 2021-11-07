@@ -179,6 +179,26 @@ var jstat = {
 		return this.pnorm(x[1]) - this.pnorm(x[0]);
 	},
 
+	rpareto: function(shape, scale) {
+		return scale/Math.pow(1-Math.random(), 1/shape);
+	},
+
+	ppareto: function(shape, scale, q) {
+		//scale - xm, shape - alpha
+		return 1 - Math.pow(scale/q, shape);
+	},
+
+	qpareto: function(shape, scale, p) {
+		return scale/Math.pow(1-p, 1/shape);
+	},
+
+	dpareto: function(shape, scale, x) {
+		if (x.length != 2) {
+			return undefined;
+		}
+		return this.ppareto(x[1]) - this.ppareto(x[0]);
+	},
+
 	/**
 	 * Kruskal-Wallis test
 	 * Time complexity of the test is O(nlogn)
